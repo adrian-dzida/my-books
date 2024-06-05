@@ -1,11 +1,17 @@
 <script setup>
 import SearchInput from './SearchInput.vue'
 import UserPanel from './UserPanel.vue'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+const goToHome = () => {
+  router.push('/')
+}
 </script>
 
 <template>
   <header class="header">
-    <img class="header__logo" alt="logo" />
+    <img class="header__logo" src="../../assets/mybookslogo.png" alt="logo" @click="goToHome" />
     <nav class="header__navigation">
       <div class="header__navigation__input"><SearchInput /></div>
       <div class="header__navigation__userPanel"><UserPanel /></div>
@@ -26,6 +32,8 @@ import UserPanel from './UserPanel.vue'
 
 .header__logo {
   margin: 0 1rem;
+  height: 2.5rem;
+  cursor: pointer;
 }
 
 .header__navigation {

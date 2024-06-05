@@ -12,7 +12,6 @@ const searchValue = defineModel('searchValue')
       class="container__searchInput"
       type="text"
       :placeholder="t('enterText')"
-      @change="test"
     />
     <button class="container__searchButton">{{ t('search') }}</button>
   </div>
@@ -25,13 +24,13 @@ const searchValue = defineModel('searchValue')
 
 .container__searchInput {
   border: none;
-  border-radius: 0.5rem 0 0 0.5rem;
+  border-radius: 8px 0 0 8px;
   padding: 0.5rem;
   outline: none;
 }
 .container__searchButton {
   border: none;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 8px 8px 0;
   padding: 0.5rem;
   color: var(--color-button-text);
   background-color: var(--color-button-bg);
