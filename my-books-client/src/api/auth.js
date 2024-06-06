@@ -1,4 +1,10 @@
 import axios from './axios'
+import { reactive } from 'vue'
+
+export const authState = reactive({
+  isAuthenticated: !!localStorage.getItem('token'),
+  user: JSON.parse(localStorage.getItem('user') || '{}')
+})
 
 export const login = async (credentials) => {
   try {
@@ -7,6 +13,8 @@ export const login = async (credentials) => {
     const user = response.data.user
     localStorage.setItem('token', token)
     localStorage.setItem('user', JSON.stringify(user))
+    authState.isAuthenticated = true
+    authState.user = user
   } catch (error) {
     throw new Error('Invalid credentials')
   }
@@ -15,10 +23,6 @@ export const login = async (credentials) => {
 export const logout = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('user')
-}
-
-export const checkUserAuthStatus = () => {
-  const userData = localStorage.getItem('user')
-  const result = userData !== null ? true : false
-  return result
+  authState.isAuthenticated = false
+  authState.user = {}
 }
