@@ -27,14 +27,15 @@ const goToHome = () => {
   flex: 1;
   background-color: var(--color-bg-primary);
   padding: 1rem;
-  height: 1.5rem;
+  height: 2rem;
   justify-content: space-between;
   align-items: center;
 }
 
 .header__logo {
-  margin: 0 1rem;
-  height: 2.5rem;
+  margin: 0 1.5rem;
+  height: 3.5rem;
+  width: 3.5rem;
   cursor: pointer;
 }
 
