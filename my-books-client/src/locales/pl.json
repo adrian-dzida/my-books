@@ -2,6 +2,11 @@
   "message": {
     "search": "Szukaj",
     "enterText": "Wprowadź tekst",
-    "bookList": "Lista książek"
+    "login": "Logowanie",
+    "password": "Hasło",
+    "logIn": "Zaloguj",
+    "logOut": "Wyloguj",
+    "loginError": "Błędne dane logowania",
+    "cancel": "Anuluj"
   }
 }

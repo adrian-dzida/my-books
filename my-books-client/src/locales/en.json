@@ -2,6 +2,11 @@
   "message": {
     "search": "Search",
     "enterText": "Enter text",
-    "bookList": "Book List"
+    "login": "Login",
+    "password": "Password",
+    "logIn": "Log In",
+    "logOut": "Log Out",
+    "loginError": "Invalid login credentials",
+    "cancel": "Cancel"
   }
 }

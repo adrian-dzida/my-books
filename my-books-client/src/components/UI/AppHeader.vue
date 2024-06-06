@@ -1,6 +1,6 @@
 <script setup>
 import SearchInput from './SearchInput.vue'
-import UserPanel from './UserPanel.vue'
+import UserPanel from '../auth/UserPanel.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()

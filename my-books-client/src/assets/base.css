@@ -18,6 +18,7 @@
   --color-button-bg: #ffd700; /* Yellow */
   --color-button-bg-hover: #ffd900f1; /* Yellow */
   --color-button-text: #0d0d0d; /* Almost Black */
+  --color-button-bg-cancel: #ff6f00;
 
   /* Border Colors */
   --color-border: #262626; /* Slightly Lighter Gray */
