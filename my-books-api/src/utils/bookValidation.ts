@@ -7,8 +7,18 @@ interface ValidationResult {
 
 const isBase64 = (str: string) => {
   const base64Regex =
-    /^(?:[A-Za-z0-9+\/]{4})*?(?:[A-Za-z0-9+\/]{2}==|[A-Za-z0-9+\/]{3}=)?$/;
+    /^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/;
   return base64Regex.test(str);
+};
+
+const isUnder2MB = (str: string) => {
+  const maxBase64Length = 2 * 1024 * 1024 * (4 / 3);
+  return str.length <= maxBase64Length;
+};
+
+const isJpgOrPng = (str: string) => {
+  const mimeTypeRegex = /^data:(image\/jpeg|image\/png);base64,/;
+  return mimeTypeRegex.test(str);
 };
 
 export const validateBook = (book: Book): ValidationResult => {
@@ -40,7 +50,9 @@ export const validateBook = (book: Book): ValidationResult => {
   if (
     !book.coverBase64 ||
     typeof book.coverBase64 !== "string" ||
-    !isBase64(book.coverBase64)
+    !isBase64(book.coverBase64.split(',')[1]) ||
+    !isUnder2MB(book.coverBase64) ||
+    !isJpgOrPng(book.coverBase64)
   ) {
     return { success: false, error: "Invalid cover image" };
   }
