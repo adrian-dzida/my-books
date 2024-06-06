@@ -1,9 +1,5 @@
 import { Book } from "../models/book";
-
-interface ValidationResult {
-  success: boolean;
-  error?: string;
-}
+import ValidationResult from "../interfaces/IValidationResult";
 
 const isBase64 = (str: string) => {
   const base64Regex =
@@ -50,7 +46,7 @@ export const validateBook = (book: Book): ValidationResult => {
   if (
     !book.coverBase64 ||
     typeof book.coverBase64 !== "string" ||
-    !isBase64(book.coverBase64.split(',')[1]) ||
+    !isBase64(book.coverBase64.split(",")[1]) ||
     !isUnder2MB(book.coverBase64) ||
     !isJpgOrPng(book.coverBase64)
   ) {

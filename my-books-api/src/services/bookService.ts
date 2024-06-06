@@ -50,17 +50,49 @@ export const getBooksPaginated = async (
   limitNum: number
 ): Promise<Book[]> => {
   const books: Book[] = [];
-  const offset = (page - 1) * limitNum;
-  const q = query(
-    collection(db, "books"),
-    orderBy("title"),
-    limit(limitNum),
-    startAfter(offset)
-  );
-  const snapshot = await getDocs(q);
+  let lastVisible = null;
 
-  snapshot.forEach((doc) => books.push({ id: doc.id, ...doc.data() } as Book));
-  return books;
+  try {
+    if (page > 1) {
+      const previousQuery = query(
+        collection(db, "books"),
+        orderBy("title"),
+        limit((page - 1) * limitNum)
+      );
+      const previousSnapshot = await getDocs(previousQuery);
+      if (!previousSnapshot.empty) {
+        lastVisible = previousSnapshot.docs[previousSnapshot.docs.length - 1];
+      } else {
+        throw new Error("Book not found");
+      }
+    }
+
+    const q = lastVisible
+      ? query(
+          collection(db, "books"),
+          orderBy("title"),
+          startAfter(lastVisible),
+          limit(limitNum)
+        )
+      : query(
+          collection(db, "books"),
+          orderBy("title"),
+          limit(limitNum)
+        );
+
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      throw new Error("Book not found");
+    }
+
+    snapshot.forEach((doc) => books.push({ id: doc.id, ...doc.data() } as Book));
+    return books;
+
+  } catch (error) {
+    console.error("Error fetching paginated books:", error);
+    throw error;
+  }
 };
 
 export const addBook = async (
