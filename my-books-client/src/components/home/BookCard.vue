@@ -1,4 +1,9 @@
 <script setup>
+import AppButton from '../UI/AppButton.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
 const props = defineProps({
   title: {
     type: String,
@@ -33,6 +38,13 @@ const props = defineProps({
       <div class="bookCard__description">
         {{ props.description.length < 100 ? props.description + '...' : props.description }}
       </div>
+      <div class="bookCard__button">
+        <AppButton
+          :button-title="t('details')"
+          button-variant="primary"
+          :button-action="closeModal"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -46,7 +58,8 @@ const props = defineProps({
   border-radius: 20px;
   background-color: var(--color-bg-primary);
   flex: 1;
-  min-height: 18rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 15rem;
 }
 
 .bookCard__cover {
@@ -54,7 +67,7 @@ const props = defineProps({
 }
 
 .bookCard__cover__image {
-  height: 20rem;
+  height: 15rem;
   max-width: 13rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -64,21 +77,31 @@ const props = defineProps({
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 15rem;
+  flex: 1;
 }
 
 .bookCard__details__title {
   font-size: 2rem;
   font-weight: bold;
-  color: var(--color-text-secondary);
+  color: var(--color-button-bg);
 }
 
 .bookCard__details__authorAndYear {
   font-size: 1rem;
-  color: var(--color-text-secondary);
+  font-style: italic;
+  color: var(--color-button-bg);
+  margin-bottom: 2rem;
 }
 
 .bookCard__description {
   font-size: 1rem;
   color: var(--color-text-secondary);
+}
+
+.bookCard__button {
+  align-self: flex-end;
+  padding: 1rem;
+  margin: 1rem;
 }
 </style>

@@ -8,6 +8,7 @@
     "logOut": "Wyloguj",
     "loginError": "Błędne dane logowania",
     "cancel": "Anuluj",
-    "listOfBooks": "Lista książek"
+    "listOfBooks": "Lista książek",
+    "details": "Szczegóły"
   }
 }

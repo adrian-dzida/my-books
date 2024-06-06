@@ -8,6 +8,7 @@
     "logOut": "Log Out",
     "loginError": "Invalid login credentials",
     "cancel": "Cancel",
-    "listOfBooks": "List of books"
+    "listOfBooks": "List of books",
+    "details": "Details"
   }
 }
