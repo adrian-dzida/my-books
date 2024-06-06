@@ -19,5 +19,6 @@ const year = ref(new Date().getFullYear())
   text-align: center;
   padding: 3px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  color: var(--color-text-secondary);
 }
 </style>

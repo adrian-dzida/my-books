@@ -9,14 +9,15 @@ const authState = useAuthState()
 
 <template>
   <div class="container">
-    <h3 class="container__title">{{ t('listOfBooks') }}</h3>
+    <!-- <h2 class="container__title">{{ t('listOfBooks') }}</h2>
     <div class="container__content">
       <div class="container__content__books">
         <BookCard />
         <BookCard />
+        <BookCard />
       </div>
       <div v-if="authState.isAuthenticated" class="container__content__addBookPanel"></div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -26,10 +27,6 @@ const authState = useAuthState()
   padding: 2rem;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-bg-secondary);
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: var(--color-bg-primary);
 }
 .container__title {
   margin-bottom: 1rem;

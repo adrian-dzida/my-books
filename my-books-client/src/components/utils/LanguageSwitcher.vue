@@ -14,7 +14,7 @@ const changeLanguage = (lang) => {
 <template>
   <div class="language-switcher">
     <select v-model="selectedLanguage" @change="changeLanguage(selectedLanguage)">
-      <option value="en">En</option>
+      <option value="en">EN</option>
       <option value="pl">PL</option>
     </select>
   </div>

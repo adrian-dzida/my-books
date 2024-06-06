@@ -28,6 +28,7 @@ const searchValue = ref('')
   border-radius: 8px 0 0 8px;
   padding: 0.5rem;
   outline: none;
+  background-color: var(--color-bg-secondary);
 }
 .container__searchButton {
   border: none;
