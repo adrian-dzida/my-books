@@ -1,10 +1,17 @@
 <script setup>
 import AppButton from '../UI/AppButton.vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter } from 'vue-router'
 
 const { t } = useI18n()
 
+const router = useRouter()
+
 const props = defineProps({
+  id: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true
@@ -26,6 +33,10 @@ const props = defineProps({
     required: true
   }
 })
+
+const goToBook = () => {
+  router.push('/book/' + props.id)
+}
 </script>
 <template>
   <div class="bookCard">
@@ -42,7 +53,7 @@ const props = defineProps({
         <AppButton
           :button-title="t('details')"
           button-variant="primary"
-          :button-action="closeModal"
+          :button-action="goToBook"
         />
       </div>
     </div>

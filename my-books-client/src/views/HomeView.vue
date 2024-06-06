@@ -1,14 +1,13 @@
 <script setup>
-import { ref, onMounted, toRaw } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import BookCard from '../components/home/BookCard.vue'
 import { getBooks } from '../api/books'
 
-let books = ref([])
+const books = ref([])
 
-onMounted(async () => {
+onBeforeMount(async () => {
   const response = await getBooks()
   books.value = response
-  console.log(toRaw(books.value))
 })
 </script>
 
@@ -18,6 +17,7 @@ onMounted(async () => {
       <BookCard
         v-for="book in books"
         :key="book.id"
+        :id="book.id"
         :title="book.title"
         :author="book.author"
         :year="book.year"

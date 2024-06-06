@@ -11,7 +11,7 @@ export const getBooks = async () => {
 
 export const getBookById = async (id) => {
   try {
-    const response = await axios.get(`/api/books/${id}`)
+    const response = await axios.get(`/books/${id}`)
     return response.data
   } catch (error) {
     throw new Error('Failed to fetch book')
@@ -20,7 +20,7 @@ export const getBookById = async (id) => {
 
 export const addBook = async (bookData) => {
   try {
-    const response = await axios.post('/api/books', bookData)
+    const response = await axios.post('/books', bookData)
     return response.data
   } catch (error) {
     throw new Error('Failed to add book')
@@ -29,7 +29,7 @@ export const addBook = async (bookData) => {
 
 export const updateBook = async (id, bookData) => {
   try {
-    const response = await axios.put(`/api/books/${id}`, bookData)
+    const response = await axios.put(`/books/${id}`, bookData)
     return response.data
   } catch (error) {
     throw new Error('Failed to update book')
@@ -38,7 +38,7 @@ export const updateBook = async (id, bookData) => {
 
 export const deleteBook = async (id) => {
   try {
-    const response = await axios.delete(`/api/books/${id}`)
+    const response = await axios.delete(`/books/${id}`)
     return response.data
   } catch (error) {
     throw new Error('Failed to delete book')
