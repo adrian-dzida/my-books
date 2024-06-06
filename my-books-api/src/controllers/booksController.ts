@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import {
   getAllBooks,
   getBookById,
+  getBooksPaginated,
+  searchBooks,
   addBook,
   updateBook,
   deleteBook,
@@ -13,6 +15,7 @@ import {
   updateComment,
   deleteComment,
   getCommentsByBookId,
+  getCommentsPaginated,
 } from "../services/commentService";
 import { Comment } from "../models/comment";
 
@@ -33,6 +36,35 @@ export const getBookByIdController = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Book not found" });
     }
     res.status(200).json(book);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
+export const searchBooksController = async (req: Request, res: Response) => {
+  const { query } = req.query;
+  if (!query) {
+    return res.status(400).json({ error: "Query parameter is required" });
+  }
+  try {
+    const books = await searchBooks(query as string);
+    res.status(200).json(books);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
+export const getBooksPaginatedController = async (
+  req: Request,
+  res: Response
+) => {
+  const { page, limit } = req.query;
+  const pageNum = parseInt(page as string, 10) || 1;
+  const limitNum = parseInt(limit as string, 10) || 10;
+
+  try {
+    const books = await getBooksPaginated(pageNum, limitNum);
+    res.status(200).json(books);
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });
   }
@@ -141,6 +173,23 @@ export const getCommentsByBookIdController = async (
   const { bookId } = req.params;
   try {
     const comments = await getCommentsByBookId(bookId);
+    res.status(200).json(comments);
+  } catch (error) {
+    res.status(500).json({ error: "Something went wrong" });
+  }
+};
+
+export const getCommentsPaginatedController = async (
+  req: Request,
+  res: Response
+) => {
+  const { bookId } = req.params;
+  const { page, limit } = req.query;
+  const pageNum = parseInt(page as string, 10) || 1;
+  const limitNum = parseInt(limit as string, 10) || 10;
+
+  try {
+    const comments = await getCommentsPaginated(bookId, pageNum, limitNum);
     res.status(200).json(comments);
   } catch (error) {
     res.status(500).json({ error: "Something went wrong" });

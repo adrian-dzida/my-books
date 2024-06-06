@@ -10,6 +10,9 @@ import {
   query,
   where,
   getDocs,
+  orderBy,
+  limit,
+  startAfter,
 } from "firebase/firestore";
 
 export const addComment = async (
@@ -62,6 +65,49 @@ export const getCommentsByBookId = async (
   const q = query(collection(db, "comments"), where("bookId", "==", bookId));
   const snapshot = await getDocs(q);
   const comments: Comment[] = [];
+  snapshot.forEach((doc) =>
+    comments.push({ id: doc.id, ...doc.data() } as Comment)
+  );
+  return comments;
+};
+
+export const getCommentsPaginated = async (
+  bookId: string,
+  page: number,
+  limitNum: number
+): Promise<Comment[]> => {
+  const comments: Comment[] = [];
+  const offset = (page - 1) * limitNum;
+  let q;
+
+  if (offset > 0) {
+    const initialQuery = query(
+      collection(db, "comments"),
+      where("bookId", "==", bookId),
+      orderBy("timestamp"),
+      limit(offset)
+    );
+    const initialSnapshot = await getDocs(initialQuery);
+    const lastVisible = initialSnapshot.docs[initialSnapshot.docs.length - 1];
+
+    q = query(
+      collection(db, "comments"),
+      where("bookId", "==", bookId),
+      orderBy("timestamp"),
+      startAfter(lastVisible),
+      limit(limitNum)
+    );
+  } else {
+    q = query(
+      collection(db, "comments"),
+      where("bookId", "==", bookId),
+      orderBy("timestamp"),
+      limit(limitNum)
+    );
+  }
+
+  const snapshot = await getDocs(q);
+
   snapshot.forEach((doc) =>
     comments.push({ id: doc.id, ...doc.data() } as Comment)
   );
