@@ -98,7 +98,8 @@ const showErrorMessage = computed(() => isError.value)
 }
 
 .modal {
-  background-color: var(--color-bg-secondary);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-secondary);
   padding: 1rem 1.5rem;
   border-radius: 5px;
   width: 20rem;

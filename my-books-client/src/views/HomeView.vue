@@ -1,15 +1,12 @@
 <script setup>
-import { useI18n } from 'vue-i18n'
 import { useAuthState } from '../composables/useAuthWatch'
 import BookCard from '../components/home/BookCard.vue'
 
-const { t } = useI18n()
 const authState = useAuthState()
 </script>
 
 <template>
   <div class="container">
-    <!-- <h2 class="container__title">{{ t('listOfBooks') }}</h2>
     <div class="container__content">
       <div class="container__content__books">
         <BookCard />
@@ -17,7 +14,7 @@ const authState = useAuthState()
         <BookCard />
       </div>
       <div v-if="authState.isAuthenticated" class="container__content__addBookPanel"></div>
-    </div> -->
+    </div>
   </div>
 </template>
 
