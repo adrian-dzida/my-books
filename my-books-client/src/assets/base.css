@@ -1,27 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 :root {
-  /* Primary Colors */
-  --color-primary-dark: #1a1a1a; /* Dark Gray */
-  --color-primary-light: #262626; /* Slightly Lighter Gray */
-  --color-accent: #ffd700; /* Yellow */
-
-  /* Text Colors */
   --color-text-primary: #ffffff; /* White */
   --color-text-secondary: #cccccc; /* Light Gray */
 
-  /* Background Colors */
   --color-bg-primary: #0d0d0d; /* Almost Black */
   --color-bg-secondary: #333333; /* Medium Gray */
 
-  /* Button Colors */
   --color-button-bg: #ffd700; /* Yellow */
   --color-button-bg-hover: #ffd900f1; /* Yellow */
   --color-button-text: #0d0d0d; /* Almost Black */
   --color-button-bg-cancel: #ff6f00;
-
-  /* Border Colors */
-  --color-border: #262626; /* Slightly Lighter Gray */
 }
 
 * {

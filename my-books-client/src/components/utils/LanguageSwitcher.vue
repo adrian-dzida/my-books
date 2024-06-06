@@ -30,6 +30,7 @@ select {
   font-size: 16px;
   border: none;
   outline: none;
+  border-radius: 8px;
   background-color: var(--color-bg-secondary);
   color: var(--color-text-primary);
   cursor: pointer;
