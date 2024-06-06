@@ -12,10 +12,11 @@ const isUnder2MB = (str: string) => {
   return str.length <= maxBase64Length;
 };
 
-const isJpgOrPng = (str: string) => {
-  const mimeTypeRegex = /^data:(image\/jpeg|image\/png);base64,/;
+const isJpg = (str: string) => {
+  const mimeTypeRegex = /^data:image\/jpeg;base64,/;
   return mimeTypeRegex.test(str);
 };
+
 
 export const validateBook = (book: Book): ValidationResult => {
   if (
@@ -48,7 +49,7 @@ export const validateBook = (book: Book): ValidationResult => {
     typeof book.coverBase64 !== "string" ||
     !isBase64(book.coverBase64.split(",")[1]) ||
     !isUnder2MB(book.coverBase64) ||
-    !isJpgOrPng(book.coverBase64)
+    !isJpg(book.coverBase64)
   ) {
     return { success: false, error: "Invalid cover image" };
   }

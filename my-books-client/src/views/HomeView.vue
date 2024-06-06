@@ -1,19 +1,29 @@
 <script setup>
-import { useAuthState } from '../composables/useAuthWatch'
+import { ref, onMounted, toRaw } from 'vue'
 import BookCard from '../components/home/BookCard.vue'
+import { getBooks } from '../api/books'
 
-const authState = useAuthState()
+let books = ref([])
+
+onMounted(async () => {
+  const response = await getBooks()
+  books.value = response
+  console.log(toRaw(books.value))
+})
 </script>
 
 <template>
   <div class="container">
-    <div class="container__content">
-      <div class="container__content__books">
-        <BookCard />
-        <BookCard />
-        <BookCard />
-      </div>
-      <div v-if="authState.isAuthenticated" class="container__content__addBookPanel"></div>
+    <div class="container__books">
+      <BookCard
+        v-for="book in books"
+        :key="book.id"
+        :title="book.title"
+        :author="book.author"
+        :year="book.year"
+        :description="book.description"
+        :cover="book.coverBase64"
+      />
     </div>
   </div>
 </template>
@@ -23,18 +33,8 @@ const authState = useAuthState()
   margin: 2rem;
   padding: 2rem;
   display: flex;
-  flex-direction: column;
 }
-.container__title {
-  margin-bottom: 1rem;
-}
-.container__content {
-  display: flex;
-}
-.container__content__books {
-  display: flex;
-}
-.container__content__addBookPanel {
-  flex: 1;
+.container__books {
+  width: 100vw;
 }
 </style>

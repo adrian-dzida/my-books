@@ -84,8 +84,8 @@ export const addBookController = async (req: Request, res: Response) => {
     }
 
     const book: Book = {
-      title: normalizedTitle,
-      author: normalizedAuthor,
+      title,
+      author,
       year,
       coverBase64,
       description,

@@ -9,7 +9,7 @@ describe("Validation Tests", () => {
       author: "Valid Author",
       year: 2023,
       coverBase64:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
         "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
         "//8/w38GIAXDIBKE0DHxgljNBAAO" +
         "9TXL0Y4OHwAAAABJRU5ErkJggg==",
@@ -26,7 +26,7 @@ describe("Validation Tests", () => {
       author: "Valid Author",
       year: 2023,
       coverBase64:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
         "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
         "//8/w38GIAXDIBKE0DHxgljNBAAO" +
         "9TXL0Y4OHwAAAABJRU5ErkJggg==",
@@ -46,7 +46,7 @@ describe("Validation Tests", () => {
       author: "A".repeat(101),
       year: 2023,
       coverBase64:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
         "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
         "//8/w38GIAXDIBKE0DHxgljNBAAO" +
         "9TXL0Y4OHwAAAABJRU5ErkJggg==",
@@ -66,7 +66,7 @@ describe("Validation Tests", () => {
       author: "Valid Author",
       year: 3000,
       coverBase64:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
         "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
         "//8/w38GIAXDIBKE0DHxgljNBAAO" +
         "9TXL0Y4OHwAAAABJRU5ErkJggg==",
@@ -102,7 +102,7 @@ describe("Validation Tests", () => {
       author: "Valid Author",
       year: 2023,
       coverBase64:
-        "data:image/png;base64," + "a".repeat(2 * 1024 * 1024 * (4 / 3) + 1),
+        "data:image/jpeg;base64," + "a".repeat(2 * 1024 * 1024 * (4 / 3) + 1),
       description: "Valid description up to 500 characters.",
       comments: [],
     };
@@ -135,7 +135,7 @@ describe("Validation Tests", () => {
       author: "Valid Author",
       year: 2023,
       coverBase64:
-        "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
         "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
         "//8/w38GIAXDIBKE0DHxgljNBAAO" +
         "9TXL0Y4OHwAAAABJRU5ErkJggg==",
@@ -147,5 +147,42 @@ describe("Validation Tests", () => {
       success: false,
       error: "Invalid description",
     });
+  });
+
+  test("should invalidate a book with invalid comments type", () => {
+    const book: Book = {
+      title: "Valid Title",
+      author: "Valid Author",
+      year: 2023,
+      coverBase64:
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
+        "//8/w38GIAXDIBKE0DHxgljNBAAO" +
+        "9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      description: "Valid description up to 500 characters.",
+      comments: {} as any, 
+    };
+
+    expect(validateBook(book)).toEqual({
+      success: false,
+      error: "Invalid comments",
+    });
+  });
+
+  test("should validate a book with optional comments", () => {
+    const book: Book = {
+      title: "Valid Title",
+      author: "Valid Author",
+      year: 2023,
+      coverBase64:
+        "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA" +
+        "AAAFCAYAAACNbyblAAAAHElEQVQI12P4" +
+        "//8/w38GIAXDIBKE0DHxgljNBAAO" +
+        "9TXL0Y4OHwAAAABJRU5ErkJggg==",
+      description: "Valid description up to 500 characters.",
+      comments: [],
+    };
+
+    expect(validateBook(book)).toEqual({ success: true });
   });
 });

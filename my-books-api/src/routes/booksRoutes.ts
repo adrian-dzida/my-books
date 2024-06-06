@@ -16,20 +16,16 @@ import authenticateJWT from "../middlewares/auth";
 
 const router = Router();
 
-router.get("/books", authenticateJWT, getAllBooksController);
-router.get("/books/paginated", authenticateJWT, getBooksPaginatedController);
-router.get("/books/:id", authenticateJWT, getBookByIdController);
-router.get("/books/search", authenticateJWT, searchBooksController);
+router.get("/books", getAllBooksController);
+router.get("/books/paginated", getBooksPaginatedController);
+router.get("/books/:id", getBookByIdController);
+router.get("/books/search", searchBooksController);
 router.post("/books", authenticateJWT, addBookController);
 router.put("/books/:id", authenticateJWT, updateBookController);
 router.delete("/books/:id", authenticateJWT, deleteBookController);
 
-router.get(
-  "/comments/paginated/:bookId",
-  authenticateJWT,
-  getCommentsPaginatedController
-);
-router.post("/books/:bookId/comments", authenticateJWT, addCommentController);
+router.get("/comments/paginated/:bookId", getCommentsPaginatedController);
+router.post("/books/:bookId/comments", addCommentController);
 router.put("/comments/:id", authenticateJWT, updateCommentController);
 router.delete("/comments/:id", authenticateJWT, deleteCommentController);
 
