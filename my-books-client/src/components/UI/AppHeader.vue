@@ -1,6 +1,7 @@
 <script setup>
-import SearchInput from './SearchInput.vue'
+import SearchInput from '../utils/SearchInput.vue'
 import UserPanel from '../auth/UserPanel.vue'
+import LanguageSwitcher from '../utils/LanguageSwitcher.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
@@ -15,6 +16,7 @@ const goToHome = () => {
     <nav class="header__navigation">
       <div class="header__navigation__input"><SearchInput /></div>
       <div class="header__navigation__userPanel"><UserPanel /></div>
+      <div class="header__navigation__languageSwitcher"><LanguageSwitcher /></div>
     </nav>
   </header>
 </template>
@@ -40,9 +42,7 @@ const goToHome = () => {
   display: flex;
   margin: 0 3rem;
   align-items: center;
-}
-
-.header__navigation__userPanel {
-  padding-left: 4rem;
+  justify-content: space-between;
+  width: 25rem;
 }
 </style>
