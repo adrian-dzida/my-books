@@ -9,6 +9,12 @@
     "loginError": "Invalid login credentials",
     "cancel": "Cancel",
     "listOfBooks": "List of books",
-    "details": "Details"
+    "details": "Details",
+    "backToList": "Back to list of books",
+    "addComment": "Add comment",
+    "listOfComments": "List of comments",
+    "rating": "Rating",
+    "comment": "Comment",
+    "charactersRemaining": "characters remaining"
   }
 }

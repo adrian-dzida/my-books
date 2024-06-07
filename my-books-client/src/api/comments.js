@@ -1,8 +1,17 @@
 import axios from './axios'
 
-export const addComment = async (bookId, commentData) => {
+export const getCommentsByBookId = async (bookId) => {
   try {
-    const response = await axios.post(`/api/books/${bookId}/comments`, commentData)
+    const response = await axios.get(`/comments/${bookId}`)
+    return response.data
+  } catch (error) {
+    throw new Error('Failed to get comments')
+  }
+}
+
+export const addComment = async (commentData) => {
+  try {
+    const response = await axios.post(`/books/comments`, commentData)
     return response.data
   } catch (error) {
     throw new Error('Failed to add comment')
@@ -11,7 +20,7 @@ export const addComment = async (bookId, commentData) => {
 
 export const updateComment = async (id, commentData) => {
   try {
-    const response = await axios.put(`/api/comments/${id}`, commentData)
+    const response = await axios.put(`/comments/${id}`, commentData)
     return response.data
   } catch (error) {
     throw new Error('Failed to update comment')
@@ -20,7 +29,7 @@ export const updateComment = async (id, commentData) => {
 
 export const deleteComment = async (id) => {
   try {
-    const response = await axios.delete(`/api/comments/${id}`)
+    const response = await axios.delete(`/comments/${id}`)
     return response.data
   } catch (error) {
     throw new Error('Failed to delete comment')

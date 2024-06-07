@@ -9,6 +9,12 @@
     "loginError": "Błędne dane logowania",
     "cancel": "Anuluj",
     "listOfBooks": "Lista książek",
-    "details": "Szczegóły"
+    "details": "Szczegóły",
+    "backToList": "Wróć do listy książek",
+    "addComment": "Dodaj komentarz",
+    "listOfComments": "Lista komentarzy",
+    "rating": "Ocena",
+    "comment": "Komentarz",
+    "charactersRemaining": "znaków pozostało"
   }
 }

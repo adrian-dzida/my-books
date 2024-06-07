@@ -46,10 +46,10 @@ const goToBook = () => {
     <div class="bookCard__details">
       <div class="bookCard__details__title">{{ props.title }}</div>
       <div class="bookCard__details__authorAndYear">{{ props.author }} - {{ props.year }}</div>
-      <div class="bookCard__description">
+      <div class="bookCard__details__description">
         {{ props.description.length < 100 ? props.description + '...' : props.description }}
       </div>
-      <div class="bookCard__button">
+      <div class="bookCard__details__button">
         <AppButton
           :button-title="t('details')"
           button-variant="primary"
@@ -105,12 +105,12 @@ const goToBook = () => {
   margin-bottom: 2rem;
 }
 
-.bookCard__description {
+.bookCard__details__description {
   font-size: 1rem;
   color: var(--color-text-secondary);
 }
 
-.bookCard__button {
+.bookCard__details__button {
   align-self: flex-end;
   padding: 1rem;
   margin: 1rem;

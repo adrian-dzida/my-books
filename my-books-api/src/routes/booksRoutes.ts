@@ -11,6 +11,7 @@ import {
   updateCommentController,
   deleteCommentController,
   getCommentsPaginatedController,
+  getCommentsByBookIdController,
 } from "../controllers/booksController";
 import authenticateJWT from "../middlewares/auth";
 
@@ -24,8 +25,9 @@ router.post("/books", authenticateJWT, addBookController);
 router.put("/books/:id", authenticateJWT, updateBookController);
 router.delete("/books/:id", authenticateJWT, deleteBookController);
 
+router.get("/comments/:bookId", getCommentsByBookIdController);
 router.get("/comments/paginated/:bookId", getCommentsPaginatedController);
-router.post("/books/:bookId/comments", addCommentController);
+router.post("/books/comments", authenticateJWT, addCommentController);
 router.put("/comments/:id", authenticateJWT, updateCommentController);
 router.delete("/comments/:id", authenticateJWT, deleteCommentController);
 
