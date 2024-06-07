@@ -19,8 +19,8 @@ const router = Router();
 
 router.get("/books", getAllBooksController);
 router.get("/books/paginated", getBooksPaginatedController);
-router.get("/books/:id", getBookByIdController);
 router.get("/books/search", searchBooksController);
+router.get("/books/:id", getBookByIdController);
 router.post("/books", authenticateJWT, addBookController);
 router.put("/books/:id", authenticateJWT, updateBookController);
 router.delete("/books/:id", authenticateJWT, deleteBookController);

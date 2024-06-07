@@ -9,6 +9,15 @@ export const getBooks = async () => {
   }
 }
 
+export const getBooksByQuery = async (query) => {
+  try {
+    const response = await axios.get(`/books/search?query=${query}`)
+    return response.data
+  } catch (error) {
+    throw new Error('Failed to fetch books')
+  }
+}
+
 export const getBookById = async (id) => {
   try {
     const response = await axios.get(`/books/${id}`)

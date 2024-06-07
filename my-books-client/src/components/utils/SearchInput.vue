@@ -1,9 +1,26 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+import { useRouter, useRoute } from 'vue-router'
+
 const { t } = useI18n()
+const router = useRouter()
+const route = useRoute()
 
 const searchValue = ref('')
+
+const goToSearchBooks = () => {
+  router.push(`/search?query=${searchValue.value}`)
+}
+
+watch(
+  () => route.query.query,
+  (newQuery) => {
+    if (!newQuery) {
+      searchValue.value = ''
+    }
+  }
+)
 </script>
 
 <template>
@@ -14,7 +31,7 @@ const searchValue = ref('')
       type="text"
       :placeholder="t('enterText')"
     />
-    <button class="container__searchButton">{{ t('search') }}</button>
+    <button class="container__searchButton" @click="goToSearchBooks">{{ t('search') }}</button>
   </div>
 </template>
 

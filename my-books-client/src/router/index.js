@@ -9,6 +9,12 @@ const routes = [
     component: HomeView
   },
   {
+    path: '/search',
+    name: 'SearchView',
+    component: HomeView,
+    props: (route) => ({ query: route.query.q })
+  },
+  {
     path: '/book/:id',
     name: 'BookView',
     component: BookView,

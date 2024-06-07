@@ -1,6 +1,8 @@
 <script setup>
 import { deleteComment } from '../../api/comments.js'
 import { useAuthState } from '../../composables/useAuthWatch.js'
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 
 const emit = defineEmits(['updateComments'])
 
@@ -40,7 +42,7 @@ const authState = useAuthState()
         v-if="authState.user.email === props.userEmail"
         style="color: red; cursor: pointer"
         @click="handleDeleteComment"
-        >DELETE</span
+        >{{ t('delete') }}</span
       >
     </div>
   </li>

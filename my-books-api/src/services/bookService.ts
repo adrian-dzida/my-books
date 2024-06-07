@@ -34,14 +34,19 @@ export const getBookById = async (id: string): Promise<Book | null> => {
 
 export const searchBooks = async (queryStr: string): Promise<Book[]> => {
   const normalizedQuery = queryStr.toLowerCase();
-  const q = query(
-    collection(db, "books"),
-    where("title", "==", normalizedQuery),
-    where("author", "==", normalizedQuery)
-  );
-  const snapshot = await getDocs(q);
+  const booksCollection = collection(db, "books");
+  const snapshot = await getDocs(booksCollection);
   const books: Book[] = [];
-  snapshot.forEach((doc) => books.push({ id: doc.id, ...doc.data() } as Book));
+
+  snapshot.forEach((doc) => {
+    const data = doc.data();
+    const title = data.title.toLowerCase();
+    const author = data.author.toLowerCase();
+    if (title.includes(normalizedQuery) || author.includes(normalizedQuery)) {
+      books.push({ id: doc.id, ...data } as Book);
+    }
+  });
+
   return books;
 };
 
@@ -74,11 +79,7 @@ export const getBooksPaginated = async (
           startAfter(lastVisible),
           limit(limitNum)
         )
-      : query(
-          collection(db, "books"),
-          orderBy("title"),
-          limit(limitNum)
-        );
+      : query(collection(db, "books"), orderBy("title"), limit(limitNum));
 
     const snapshot = await getDocs(q);
 
@@ -86,9 +87,10 @@ export const getBooksPaginated = async (
       throw new Error("Book not found");
     }
 
-    snapshot.forEach((doc) => books.push({ id: doc.id, ...doc.data() } as Book));
+    snapshot.forEach((doc) =>
+      books.push({ id: doc.id, ...doc.data() } as Book)
+    );
     return books;
-
   } catch (error) {
     console.error("Error fetching paginated books:", error);
     throw error;
