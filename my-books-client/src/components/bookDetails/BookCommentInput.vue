@@ -146,4 +146,10 @@ const authState = useAuthState()
 .addComment__form__button {
   padding: 1rem;
 }
+
+@media (max-width: 1150px) {
+  .addComment {
+    width: 100%;
+  }
+}
 </style>

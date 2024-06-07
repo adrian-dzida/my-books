@@ -36,27 +36,29 @@ const authState = useAuthState()
 
 <template>
   <p class="breadcrums" @click="goToHome">{{ t('backToList') }}</p>
-  <div class="container">
-    <div class="container__cover">
-      <img class="container__cover__image" :src="book.coverBase64" alt="book cover" />
-    </div>
-    <div class="container__details">
-      <div class="container__details__title">{{ book.title }}</div>
-      <div class="container__details__authorAndYear">{{ book.author }} - {{ book.year }}</div>
-      <div class="container__details__description">
-        {{ book.description }}
+  <div class="wrapper">
+    <div class="container">
+      <div class="container__cover">
+        <img class="container__cover__image" :src="book.coverBase64" alt="book cover" />
       </div>
-      <div v-if="authState.isAuthenticated" class="container__details__commentInput">
-        <BookCommentInput @updateComments="handleUpdateComment" />
+      <div class="container__details">
+        <div class="container__details__title">{{ book.title }}</div>
+        <div class="container__details__authorAndYear">{{ book.author }} - {{ book.year }}</div>
+        <div class="container__details__description">
+          {{ book.description }}
+        </div>
+        <div v-if="authState.isAuthenticated" class="container__details__commentInput">
+          <BookCommentInput @updateComments="handleUpdateComment" />
+        </div>
       </div>
     </div>
-  </div>
-  <h2 class="commentsTitle">{{ t('listOfComments') }}</h2>
-  <div class="comments">
-    <ListOfComments
-      :update-comments="updateComment"
-      @resetUpdateCommentsWatcher="handleResetUpdateCommentsWatcher"
-    />
+    <h2 class="commentsTitle">{{ t('listOfComments') }}</h2>
+    <div class="comments">
+      <ListOfComments
+        :update-comments="updateComment"
+        @resetUpdateCommentsWatcher="handleResetUpdateCommentsWatcher"
+      />
+    </div>
   </div>
 </template>
 
@@ -123,5 +125,16 @@ const authState = useAuthState()
 
 .commentsTitle {
   text-align: center;
+}
+
+@media (max-width: 750px) {
+  .wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 </style>

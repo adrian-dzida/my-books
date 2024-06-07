@@ -27,6 +27,7 @@
     "year": "Rok",
     "cover": "Okładka (JPG)",
     "addBookError": "Błąd dodawania książki",
-    "coverInvalid": "Nie poprawny plik z okładką"
+    "coverInvalid": "Nie poprawny plik z okładką",
+    "loading": "Ładowanie..."
   }
 }

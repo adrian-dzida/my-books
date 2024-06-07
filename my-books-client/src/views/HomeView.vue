@@ -92,7 +92,7 @@ const authState = useAuthState()
       />
     </div>
   </div>
-  <div v-else-if="loading" class="info">Ładowanie...</div>
+  <div v-else-if="loading" class="info">{{ t('loading') }}</div>
   <div v-else class="info">{{ t('notFound') }}</div>
 
   <div v-if="showCookieConsent" class="cookie-consent">

@@ -27,6 +27,7 @@
     "year": "Year",
     "cover": "Cover (JPG)",
     "addBookError": "Error adding book",
-    "coverInvalid": "Cover invalid"
+    "coverInvalid": "Cover invalid",
+    "loading": "Loading..."
   }
 }
