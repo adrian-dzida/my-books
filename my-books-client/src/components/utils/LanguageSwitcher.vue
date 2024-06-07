@@ -22,12 +22,11 @@ const changeLanguage = (lang) => {
 
 <style scoped>
 .language-switcher {
-  margin: 10px 0;
+  margin: 0.5rem 0;
 }
 
 select {
-  padding: 5px;
-  font-size: 16px;
+  padding: 0.4rem;
   border: none;
   outline: none;
   border-radius: 8px;

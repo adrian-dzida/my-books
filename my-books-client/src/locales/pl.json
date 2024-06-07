@@ -17,6 +17,8 @@
     "comment": "Komentarz",
     "charactersRemaining": "znaków pozostało",
     "delete": "USUŃ",
-    "notFound": "Nie znaleziono książek"
+    "notFound": "Nie znaleziono książek",
+    "cookieConsentMessage": "Ta strona używa plików cookies, aby zapewnić najlepsze doświadczenia na naszej stronie.",
+    "acceptCookies": "Akceptuj"
   }
 }

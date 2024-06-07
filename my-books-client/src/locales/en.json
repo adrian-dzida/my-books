@@ -17,6 +17,8 @@
     "comment": "Comment",
     "charactersRemaining": "characters remaining",
     "delete": "DELETE",
-    "notFound": "Not found books"
+    "notFound": "Not found books",
+    "cookieConsentMessage": "This website uses cookies to ensure you get the best experience on our website.",
+    "acceptCookies": "Accept"
   }
 }

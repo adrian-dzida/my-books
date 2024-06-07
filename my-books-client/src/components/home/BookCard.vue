@@ -115,4 +115,10 @@ const goToBook = () => {
   padding: 1rem;
   margin: 1rem;
 }
+
+@media (max-width: 800px) {
+  .bookCard {
+    height: 25rem;
+  }
+}
 </style>

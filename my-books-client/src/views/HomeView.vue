@@ -12,8 +12,16 @@ const route = useRoute()
 const books = ref([])
 const loading = ref(false)
 
+// Logika zgody na cookies
+const showCookieConsent = ref(true)
+
+const acceptCookies = () => {
+  showCookieConsent.value = false
+}
+
 onBeforeMount(async () => {
   loading.value = true
+
   if (!route.query.query) {
     const response = await getBooks()
     books.value = response
@@ -21,6 +29,7 @@ onBeforeMount(async () => {
     const response = await getBooksByQuery(route.query.query)
     books.value = response
   }
+
   loading.value = false
 })
 
@@ -53,8 +62,13 @@ watch(
       />
     </div>
   </div>
-  <div v-else-if="loading" class="info">Loading...</div>
+  <div v-else-if="loading" class="info">Ładowanie...</div>
   <div v-else class="info">{{ t('notFound') }}</div>
+
+  <div v-if="showCookieConsent" class="cookie-consent">
+    <p>{{ t('cookieConsentMessage') }}</p>
+    <button @click="acceptCookies">{{ t('acceptCookies') }}</button>
+  </div>
 </template>
 
 <style scoped>
@@ -72,5 +86,35 @@ watch(
   padding: 10rem;
   justify-content: center;
   font-size: 2rem;
+}
+
+.cookie-consent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 9999;
+}
+
+.cookie-consent p {
+  margin: 0;
+}
+
+.cookie-consent button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.cookie-consent button:hover {
+  background-color: #45a049;
 }
 </style>

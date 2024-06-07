@@ -60,4 +60,10 @@ const baseClass = ref('button')
 .secondary:hover {
   background-color: rgba(122, 122, 122, 0.2);
 }
+
+@media (max-width: 800px) {
+  .button {
+    padding: 0.2rem;
+  }
+}
 </style>

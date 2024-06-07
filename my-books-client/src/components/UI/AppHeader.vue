@@ -33,7 +33,7 @@ const goToHome = () => {
 }
 
 .header__logo {
-  margin: 0 1.5rem;
+  margin: 0 1rem;
   height: 3.5rem;
   width: 3.5rem;
   cursor: pointer;
@@ -44,6 +44,12 @@ const goToHome = () => {
   margin: 0 3rem;
   align-items: center;
   justify-content: space-between;
-  width: 25rem;
+  min-width: 25rem;
+}
+
+@media (max-width: 1000px) {
+  .header__navigation {
+    min-width: 35rem;
+  }
 }
 </style>
