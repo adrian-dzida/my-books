@@ -17,10 +17,20 @@ import {
 } from "firebase/firestore";
 
 export const getAllBooks = async (): Promise<Book[]> => {
-  const snapshot = await getDocs(collection(db, "books"));
-  const books: Book[] = [];
-  snapshot.forEach((doc) => books.push({ id: doc.id, ...doc.data() } as Book));
-  return books;
+  try {
+    const q = query(collection(db, "books"), orderBy("createdAt", "desc"));
+    const snapshot = await getDocs(q);
+
+    const books: Book[] = [];
+    snapshot.forEach((doc) => {
+      books.push({ id: doc.id, ...doc.data() } as Book);
+    });
+
+    return books;
+  } catch (error) {
+    console.error("Error fetching books: ", error);
+    throw error;
+  }
 };
 
 export const getBookById = async (id: string): Promise<Book | null> => {
@@ -105,7 +115,10 @@ export const addBook = async (
     return { success: false, error: validation.error };
   }
   try {
-    const docRef = await addDoc(collection(db, "books"), book);
+    const docRef = await addDoc(collection(db, "books"), {
+      ...book,
+      createdAt: new Date(),
+    });
     return { success: true, id: docRef.id };
   } catch (error) {
     return { success: false, error: "Something went wrong" };

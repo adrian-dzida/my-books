@@ -10,8 +10,10 @@ const { t } = useI18n()
 const route = useRoute()
 
 const books = ref([])
+const loading = ref(false)
 
 onBeforeMount(async () => {
+  loading.value = true
   if (!route.query.query) {
     const response = await getBooks()
     books.value = response
@@ -19,6 +21,7 @@ onBeforeMount(async () => {
     const response = await getBooksByQuery(route.query.query)
     books.value = response
   }
+  loading.value = false
 })
 
 watch(
@@ -36,7 +39,7 @@ watch(
 </script>
 
 <template>
-  <div v-if="books.length > 0" class="container">
+  <div v-if="books.length > 0 && !loading" class="container">
     <div class="container__books">
       <BookCard
         v-for="book in books"
@@ -50,6 +53,7 @@ watch(
       />
     </div>
   </div>
+  <div v-else-if="loading" class="info">Loading...</div>
   <div v-else class="info">{{ t('notFound') }}</div>
 </template>
 

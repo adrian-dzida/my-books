@@ -6,4 +6,5 @@ export interface Book {
   coverBase64: string;
   description: string;
   comments?: Comment[];
+  createdAt?: Date;
 }

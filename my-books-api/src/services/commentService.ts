@@ -23,7 +23,10 @@ export const addComment = async (
     return { success: false, error: validation.error };
   }
   try {
-    const docRef = await addDoc(collection(db, "comments"), comment);
+    const docRef = await addDoc(collection(db, "comments"), {
+      ...comment,
+      createdAt: new Date(),
+    });
     return { success: true, id: docRef.id };
   } catch (error) {
     return { success: false, error: "Something went wrong." };
@@ -62,13 +65,27 @@ export const deleteComment = async (id: string): Promise<void> => {
 export const getCommentsByBookId = async (
   bookId: string
 ): Promise<Comment[]> => {
-  const q = query(collection(db, "comments"), where("bookId", "==", bookId));
-  const snapshot = await getDocs(q);
-  const comments: Comment[] = [];
-  snapshot.forEach((doc) =>
-    comments.push({ id: doc.id, ...doc.data() } as Comment)
-  );
-  return comments;
+  try {
+    const q = query(
+      collection(db, "comments"),
+      where("bookId", "==", bookId),
+      orderBy("createdAt", "desc")
+    );
+    const snapshot = await getDocs(q);
+
+    if (snapshot.empty) {
+      return [];
+    }
+
+    const comments: Comment[] = [];
+    snapshot.forEach((doc) => {
+      comments.push({ id: doc.id, ...doc.data() } as Comment);
+    });
+
+    return comments;
+  } catch (error) {
+    throw error;
+  }
 };
 
 export const getCommentsPaginated = async (
@@ -93,7 +110,7 @@ export const getCommentsPaginated = async (
     q = query(
       collection(db, "comments"),
       where("bookId", "==", bookId),
-      orderBy("timestamp"),
+      orderBy("createdAt"),
       startAfter(lastVisible),
       limit(limitNum)
     );
@@ -101,7 +118,7 @@ export const getCommentsPaginated = async (
     q = query(
       collection(db, "comments"),
       where("bookId", "==", bookId),
-      orderBy("timestamp"),
+      orderBy("createdAt"),
       limit(limitNum)
     );
   }
