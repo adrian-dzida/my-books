@@ -19,6 +19,14 @@
     "delete": "USUŃ",
     "notFound": "Nie znaleziono książek",
     "cookieConsentMessage": "Ta strona używa plików cookies, aby zapewnić najlepsze doświadczenia na naszej stronie.",
-    "acceptCookies": "Akceptuj"
+    "acceptCookies": "Akceptuj",
+    "addBook": "Dodaj książkę",
+    "title": "Tytuł (100 znaków max)",
+    "author": "Autor (100 znaków max)",
+    "description": "Opis (500 znaków max)",
+    "year": "Rok",
+    "cover": "Okładka (JPG)",
+    "addBookError": "Błąd dodawania książki",
+    "coverInvalid": "Nie poprawny plik z okładką"
   }
 }

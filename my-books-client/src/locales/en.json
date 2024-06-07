@@ -19,6 +19,14 @@
     "delete": "DELETE",
     "notFound": "Not found books",
     "cookieConsentMessage": "This website uses cookies to ensure you get the best experience on our website.",
-    "acceptCookies": "Accept"
+    "acceptCookies": "Accept",
+    "addBook": "Add Book",
+    "title": "Title (100 characters max)",
+    "author": "Author (100 characters max)",
+    "description": "Description (500 characters max)",
+    "year": "Year",
+    "cover": "Cover (JPG)",
+    "addBookError": "Error adding book",
+    "coverInvalid": "Cover invalid"
   }
 }
