@@ -118,7 +118,7 @@ const goToBook = () => {
 
 @media (max-width: 800px) {
   .bookCard {
-    height: 25rem;
+    height: 28rem;
   }
 }
 </style>
